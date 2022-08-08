@@ -1,16 +1,13 @@
 <?php
 
 use App\models\Post;
-use Faker\Provider\File as ProviderFile;
-use Illuminate\Http\Testing\File as TestingFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
-use League\CommonMark\Extension\FrontMatter\Data\SymfonyYamlFrontMatterParser;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 Route::get('/', function () {
    $files = File::files(resource_path("posts"));
-   $document = [];
+   $posts= [];
 
    foreach ($files as $file) {
     $document = YamlFrontMatter::parseFile($file);
@@ -20,19 +17,14 @@ Route::get('/', function () {
         $document->excerpt,
         $document->date,
         $document->body,
+        $document->slug,
     );
    }
+   // $posts = Post::all();
 
-   dd($posts);
-
-   
-
-
-    // $posts = Post::all();
-
-    // return view('posts', [
-    //     'posts' => $posts
-    // ]);
+    return view('posts', [
+        'posts' => $posts
+    ]);
 });
 
 Route::get('posts/{post}', function ($slug) {
