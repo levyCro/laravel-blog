@@ -2,11 +2,10 @@
 
 namespace App\models;
 
-use Faker\Core\File;
+//use Faker\Core\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\File as HttpFile;
-use Illuminate\Support\Facades\File as FacadesFile;
-use Illuminate\Validation\Rules\File as RulesFile;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
+use Illuminate\Support\Facades\File;
 
 class Post
 {
@@ -16,31 +15,45 @@ class Post
     public $body;
     public $slug;
 
-public function __construct($title, $excerpt, $date, $body, $slug)
-{
-    $this->title = $title;
-    $this->excerpt = $excerpt;
-    $this->date = $date;
-    $this->body = $body;
-    $this->slug = $slug;
-}
+    public function __construct($title, $excerpt, $date, $body, $slug)
+    {
+        $this->title = $title;
+        $this->excerpt = $excerpt;
+        $this->date = $date;
+        $this->body = $body;
+        $this->slug = $slug;
+    }
 
     public static function all()
     {
-        $files = FacadesFile::files(resource_path("posts/"));
-        return array_map(fn($file) => $file->getContents(), $files);
+        //return cache()->rememberForever('posts.all', function () { 
+        return collect(File::files(resource_path("posts")))
+            ->map(fn ($file) => YamlFrontMatter::parseFile($file))
+
+            ->map(fn ($document) => new Post(
+                $document->title,
+                $document->excerpt,
+                $document->date,
+                $document->body(),
+                $document->slug,
+            ))
+            ->sortByDesc('date');
+            //});
     }
 
     public static function find($slug)
     {
-        
-        if (!file_exists($path = resource_path("posts/{$slug}.html"))) {
+        return static::all()->firstWhere('slug', $slug);
+    }
+    
+    // getting 404 error when url is not correct.
+    public static function findOrFail($slug)
+    {
+        $post = static::find($slug);
+
+        if (!$post) {
             throw new ModelNotFoundException();
         }
-
-
-        return cache()->remember("posts.{$slug}", 1200, fn () => file_get_contents($path));
+        return $post;
     }
-
-    
 }

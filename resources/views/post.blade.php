@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laravel Blog</title>
-    <link rel="stylesheet" href="app.css">
-</head>
-<body>
+   <x-layout>
    <article>
-       <?= $post ?>
+      <h1>{{ $post->title; }}</h1> 
+      <div>
+        <p>{{ $post->body; }}</p>
+        <small>{{ \Carbon\Carbon::parse($post->date)->format('d/m/Y')}}</small>
+      </div>
+      
     </article>
 
     <a href="/">Go Back</a>
-    
-</body>
-</html>
+    </x-layout>
