@@ -3,10 +3,13 @@
     <article>
 
         <h1>
-            <a href="/posts/{{ $post->id; }}">
-                {!! $post->title !!}
+            <a href="/posts/{{ $post->slug; }}">
+                {{ $post->title }}
             </a>
         </h1>
+        <p>
+            <a href="#">{{ $post->category->name }}</a>
+        </p>
         <div>
             <p>{{ $post->excerpt; }}</p>
             <small>{{ \Carbon\Carbon::parse($post->date)->format('d/m/Y')}}</small>

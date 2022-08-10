@@ -1,8 +1,10 @@
    <x-layout>
    <article>
-      <h1>{!! $post->title !!}</h1> 
+      <h1>{{ $post->title }}</h1> 
       <div>
-        {!! $post->body !!}
+        <p>{{ $post->body }}</p>
+        
+        <br/>
         <small>{{ \Carbon\Carbon::parse($post->date)->format('d/m/Y')}}</small>
       </div>
       
