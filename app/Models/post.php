@@ -11,6 +11,8 @@ class Post extends Model
     // dont forget to guard it later on
     protected $guarded = [];
 
+    protected $with = ['category', 'author'];
+
     public function category()
     {
         return $this->belongsTo(Category::class);
