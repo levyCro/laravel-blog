@@ -48,6 +48,14 @@
 
         </div>
       </div>
+
+      <section class="col-start-5 col-span-7 mt-10 space-y-6">
+          <x-post-comment />
+          <x-post-comment />
+          <x-post-comment />
+          <x-post-comment />
+      </section>
+
     </article>
   </main>
 </x-layout>
