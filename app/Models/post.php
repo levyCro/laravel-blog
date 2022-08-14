@@ -28,6 +28,11 @@ class Post extends Model
                 $query->whereHas('author', fn ($query) => 
                 $query->where('username', $author)));
     }
+    // a post can have many comments.
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
     // checks if it posts belongs to a category
     public function category()
     {
