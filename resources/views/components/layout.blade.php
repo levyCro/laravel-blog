@@ -1,6 +1,6 @@
 <!doctype html>
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-<title>Laravel From Scratch Blog</title>
+<title>Laravel Holidays Blog</title>
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">  
  @vite('resources/css/app.css')
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -18,7 +18,7 @@
         <nav class="md:flex md:justify-between md:items-center">
             <div>
                 <a href="/">
-                    <img src="/images/logo.svg" alt="Laracasts Logo" width="165" height="16">
+                    <img src="/images/travel-stories.png" alt="Laracasts Logo" width="300" height="100">
                 </a>
             </div>
 
@@ -30,11 +30,15 @@
                     <x-slot name="trigger">
                         <button class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}!</button>
                     </x-slot>
-                    <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')">Dashboard</x-dropdown-item>
-                    <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')">New Post</x-dropdown-item>
+
+                    @can('admin')
+                        <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')">Dashboard</x-dropdown-item>
+                        <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')">New Post</x-dropdown-item>
+                    @endcan
+
                 </x-dropdown>
 
-                <form action="/logout" method="post" class="text-xs font-semibold text-blue-500 ml-6">
+                <form action="/logout" method="post" class="text-xs font-semibold text-green-500 ml-6">
                     @csrf
                     <button type="submit">Log Out</button>
                 </form>
@@ -44,21 +48,21 @@
                     <a href="/login" class="ml-6 text-xs font-bold uppercase">Log In</a>
                 @endauth
 
-                <a href="#newsletter" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
-                    Subscribe for Updates
+                <a href="#newsletter" class="bg-green-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
+                    Subscribe For newsletter
                 </a>
             </div>
         </nav>
 
         {{ $slot }}
 
-        <footer id="newsletter" class="bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16">
-            <img src="/images/lary-newsletter-icon.svg" alt="" class="mx-auto -mb-6" style="width: 145px;">
-            <h5 class="text-3xl">Stay in touch with the latest posts</h5>
+        <footer id="newsletter" class="bg-green-100 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16">
+            <img src="/images/mail.png" alt="" class="mx-auto mb-6" style="width: 145px;">
+            <h5 class="text-3xl text-green-600">Stay in touch with the latest posts</h5>
             <p class="text-sm mt-3">Promise to keep the inbox clean. No bugs.</p>
 
             <div class="mt-10">
-                <div class="relative inline-block mx-auto lg:bg-gray-200 rounded-full">
+                <div class="relative inline-block mx-auto lg:bg-green-200 rounded-full">
 
                     <form method="POST" action="/newsletter" class="lg:flex text-sm">
                         @csrf
@@ -73,7 +77,7 @@
                         </div>
 
                         <button type="submit"
-                                class="transition-colors duration-300 bg-blue-500 hover:bg-blue-600 mt-4 lg:mt-0 lg:ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-8"
+                                class="transition-colors duration-300 bg-green-500 hover:bg-green-600 mt-4 lg:mt-0 lg:ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-8"
                         >
                             Subscribe
                         </button>

@@ -7,8 +7,14 @@
                 @csrf
 
                 <x-form.input name="email" type="email" autocomplete="username" />
+                @error ('email')
+                    <span class="text-sm text-red-500">{{ $message }}</span>
+                @enderror
 
                 <x-form.input name="password" type="password" autocomplete="newPassword" />
+                @error ('password')
+                    <span class="text-sm text-red-500">{{ $message }}</span>
+                @enderror
 
                 <x-form.button>Log In</x-form.button>
 

@@ -7,11 +7,30 @@
                 @csrf
 
                 <x-form.input name="name" type="name" />
-                <x-form.input name="username" type="username" />
-                <x-form.input name="email" type="email" />
-                <x-form.input name="password" type="password" />
+                @error ('name')
+                    <span class="text-sm text-red-500">{{ $message }}</span>
+                @enderror
 
-                <x-form.button>Log In</x-form.button>
+                <x-form.input name="username" type="username" />
+                 @error ('username')
+                    <span class="text-sm text-red-500">{{ $message }}</span>
+                @enderror
+                
+               
+                <x-form.input name="email" type="email" />
+                 @error ('email')
+                    <span class="text-sm text-red-500">{{ $message }}</span>
+                @enderror
+                <x-form.input name="password" type="password" />
+                 @error ('password')
+                    <span class="text-sm text-red-500">{{ $message }}</span>
+                @enderror
+
+                <x-form.button>Submit</x-form.button>
+       
+                
+   
+
 
             </form>
             </x-panel>

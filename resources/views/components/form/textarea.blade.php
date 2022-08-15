@@ -4,7 +4,7 @@
     <x-form.label name="{{ $name }}" />
 
     <textarea name="{{ $name }}" 
-        class="border border-gray-300 p-2 w-full rounded" 
+        class="border border-green-300 p-2 w-full rounded" 
         rows="6" 
         required
         {{ $attributes }}>

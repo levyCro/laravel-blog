@@ -19,7 +19,7 @@
              @enderror
 
           </div>
-          <div class="flex justify-end mt-6 pt-6 border-t border-gray-200">
+          <div class="flex justify-end mt-6 pt-6 border-t border-green-200">
             <x-form.button>Post</x-form.button>
           </div>
         </form>
@@ -27,8 +27,8 @@
             
         @else
         <p class="font-semibold">
-          <a href="/register" class="hover:underline text-blue-400">Register</a> or 
-          <a href="/login" class="hover:underline text-blue-500">log in</a> to leave a comment.
+          <a href="/register" class="hover:underline text-green-400">Register</a> or 
+          <a href="/login" class="hover:underline text-green-500">log in</a> to leave a comment.
         </p>
             
 @endauth

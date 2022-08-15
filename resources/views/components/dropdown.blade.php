@@ -10,7 +10,7 @@
 
 
     <!-- Links -->
-    <div x-show="show" class="py-2 absolute bg-gray-100 mt-2 rounded-xl z-50 w-full overflow-auto max-h-52" style="display: none">
+    <div x-show="show" class="py-2 absolute bg-green-100 mt-2 rounded-xl z-50 w-full overflow-auto max-h-52" style="display: none">
       {{ $slot }}
     </div>
 </div>
