@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Validation\Rule;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -18,6 +17,10 @@ class PostController extends Controller
     
     public function show(Post $post)
     {
+        Cache::rememberForever('users', function () {
+        return DB::table('users')->get();
+        }); 
+
         return view('posts.show', [
         'post' => $post
         ]);
