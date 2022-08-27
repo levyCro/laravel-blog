@@ -6,7 +6,9 @@ use App\Models\User;
 use App\Services\Newsletter;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        Schema::defaultStringLength(191);
        
     }
 
