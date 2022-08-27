@@ -11,7 +11,7 @@ class Post extends Model
     // dont forget to guard it later on
     protected $guarded = [];
 
-    protected $with = ['category', 'author'];
+ protected $with = ['category', 'author'];
     // search for querys in title and body fields
     public function scopeFilter($query, array $filters)
     {
