@@ -2,8 +2,16 @@
 
 use Illuminate\Support\Str;
 
+$databaseUrl = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
 
 return [
+    'url' => $databaseUrl,
+            'host' => $databaseUrl['host'],
+            'port' => 3306,
+            'database' => substr($url["path"], 1),
+            'username' => $databaseUrl['user'],
+            'password' => $databaseUrl['pass'],
 
     /*
     |--------------------------------------------------------------------------
@@ -15,19 +23,9 @@ return [
     | you may use many connections at once using the Database library.
     |
     */
-    $cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-$cleardb_server = $cleardb_url["host"];
-$cleardb_username = $cleardb_url["user"];
-$cleardb_password = $cleardb_url["pass"];
-$cleardb_db = substr($cleardb_url["path"],1);
-$active_group = 'default';
-$query_builder = TRUE;
-// Connect to DB
-$conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
-
 
     'default' => env('DB_CONNECTION', 'mysql_heroku_production'),
-    'default' => env('DB_CONNECTION', 'mysql'),
+    //'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -44,6 +42,7 @@ $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $c
     | choice installed on your machine before you begin development.
     |
     */
+    
 
     'connections' => [
 
@@ -75,16 +74,16 @@ $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $c
             ]) : [],
         ],
 
-        // 'your_heroku_mysql_connection' => array(
-        //     'driver' => 'mysql',
-        //     'host' => $host,
-        //     'database' => $database,
-        //     'username' => $username,
-        //     'password' => $password,
-        //     'charset' => 'utf8',
-        //     'collation' => 'utf8_unicode_ci',
-        //     'prefix' => '',
-        // ),
+        'your_heroku_mysql_connection' => array(
+            'driver' => 'mysql',
+            'host' => $host,
+            'database' => $database,
+            'username' => $username,
+            'password' => $password,
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+        ),
 
         'pgsql' => [
             'driver' => 'pgsql',
