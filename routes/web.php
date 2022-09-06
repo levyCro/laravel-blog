@@ -10,10 +10,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function()
-{
-    return User::all();
-});
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 
