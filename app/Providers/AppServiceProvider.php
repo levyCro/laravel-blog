@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Gate::define('admin', function (User $user) {
-            return $user->username === 'levycr' || $user->username === 'bobo' || $user->username === 'thomas'; 
+            return $user->username === 'levy' || $user->username === 'bobo' || $user->username === 'thomas'; 
         });
 
         Blade::if('admin', function (){
